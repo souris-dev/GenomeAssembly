@@ -38,7 +38,7 @@ Show the string that occurs 2 times (or more) out of the three. If all the 3 str
 ### Processing the Input
 
 Following good design, there shall be a `class KMerifier` that takes a value `k`, and a `vector<string>` in its constructor.
-An object of this class will help to generate the k-mers **and** (k-1)-mers, when given the `vector<string>`.
+An object of this class will help to generate the k-mers **and** (k-1)-mers, from the given `vector<string>`.
 
 This class will also help to provide the **unique (k-1)-mers**.
 
@@ -78,6 +78,8 @@ Remember that here, the nodes of the DeBruijn graph are `string`s.
 
 A class DeBruijnGraph would be handy for this.
 
+**A `DeBruijnGraph` object's nodes should be initialized by first creating a KMerifier object and then passing it to a function `initNodesFromKMerifier`, which takes that object as an argument.**
+
 The adjacency list will be an unordered_map (for easy access of elements using []).
 
 It (the adjacency list) can be hence represented like this:
@@ -86,7 +88,7 @@ It (the adjacency list) can be hence represented like this:
 
 so that saying `adjList["b"][0]` would mean `"b0"`. This needs to be done because the nodes are strings.
 
-__(Note: Please see the `#define` directive in the beginning)__
+__(Note: Please see the `#define` directive in the beginning.)__
 
 ```cpp
 #define Node string
@@ -123,4 +125,10 @@ The Eulerian walk of the `DeBruijnGraph` will be performed by calling the `DoEul
 The algorithm used to do this is: [Hierholzer's Algorithm](https://www.geeksforgeeks.org/hierholzers-algorithm-directed-graph/) (a linear time algorithm).
 
 
+## Main Workflow design
+
+1. Take in `k` and the reads, then create a `KMerifier` object.
+2. Create a `DeBruijnGraph` object and initialize its nodes using the `KMerifier` class object (created in step 1).
+3. Use `DoEulerianWalk()` of the `DeBruijnGraph` object to get the complete string.
+4. **Next Implementation**: Do the above three steps for different values of `k` (instead of asking the user for `k` again, use *k(initial) + 1* and *k(initial) - 1* as `k` values, as mentioned before).
 
