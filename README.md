@@ -13,6 +13,7 @@
 6. Perform an Eulerian walk on the De Bruijn graph.
 
    a. While we visit the nodes during the Eulerian walk, take the whole string of the first node, and append the last letter of the consecutive nodes to it.
+   
    b. Ignore the last edge (as the last edge connects the last node with the first node, due to step 5).
 
    c. For example, a walk like:
