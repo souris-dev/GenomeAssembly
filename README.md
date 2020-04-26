@@ -45,7 +45,7 @@ After that, create a `KMerifier` object with that value of k and the reads, and 
 Following good design, there shall be a `class KMerifier` that takes a value `k`, and a `vector<string>` in its constructor.
 An object of this class will help to generate the k-mers **and** (k-1)-mers, from the given `vector<string>`.
 
-This class will also help to provide the **unique (k-1)-mers**.
+This class will also help to generate a set of **unique (k-1)-mers**.
 
 The design of the class will be something like this:
 
