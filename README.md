@@ -35,6 +35,11 @@ Show the string that occurs 2 times (or more) out of the three. If all the 3 str
 
 ## Class Design
 
+### Taking Input
+
+This is quite a simple task: ask the user for the value of `k`, and the number of reads. Then, take in the reads.
+After that, create a `KMerifier` object with that value of k and the reads, and let the workflow continue.
+
 ### Processing the Input
 
 Following good design, there shall be a `class KMerifier` that takes a value `k`, and a `vector<string>` in its constructor.
@@ -78,7 +83,9 @@ Remember that here, the nodes of the DeBruijn graph are `string`s.
 
 A class DeBruijnGraph would be handy for this.
 
-**A `DeBruijnGraph` object's nodes should be initialized by first creating a KMerifier object and then passing it to a function `initNodesFromKMerifier`, which takes that object as an argument.**
+**A `DeBruijnGraph` object's nodes should be initialized by either of these methods:
+1. Creating a KMerifier object and then passing it to a function `initNodesFromKMerifier`, which takes that object as an argument.**
+2. Creating a KMerifier object and then passing it to the constructor of the class `DeBruijnGraph`, so that it gets initialized at the time of creation.**
 
 The adjacency list will be an unordered_map (for easy access of elements using []).
 
@@ -105,6 +112,9 @@ private:
 	void countEdges(); // counts the number of edges each node has EMERGING from it (populates edge_counts)
 
 public:
+	DeBruijnGraph(); // empty constructor
+	DeBruijnGraph(KMerifier kmf); // constructor to directly initialize the graph with a KMerifier object
+
 	void addEdge(Node node1, Node node2);
 	void addNode(Node node);
 
