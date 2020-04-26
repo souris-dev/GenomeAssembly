@@ -1,0 +1,6 @@
+# We don't want executables and object files on GitHub
+*.exe
+*.o
+*.out
+/build/
+
