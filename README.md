@@ -69,7 +69,7 @@ public:
 
 	int getK(); // returns value of k
 	void setK(); // sets the value of k
-}
+};
 ```
 For a general idea of how this needs to be done, have a look at `src/proc_input.cpp`.
 
@@ -128,7 +128,7 @@ public:
 	string DoEulerianWalk(); // implementation of the Heirholzer's algorithm. This function returns the original string.
 
 	// ... other functions may be added, for example, for debugging.
-}
+};
 ```
 
 The Eulerian walk of the `DeBruijnGraph` will be performed by calling the `DoEulerianWalk()` function. This function returns us the complete string.
