@@ -125,7 +125,7 @@ public:
 
 	void printAdjList(); // for debugging purposes
 
-	string DoEulerianWalk(); // implementation of the Heirholzer's algorithm.
+	string DoEulerianWalk(); // implementation of the Heirholzer's algorithm. This function returns the original string.
 
 	// ... other functions may be added, for example, for debugging.
 }
@@ -135,7 +135,7 @@ The Eulerian walk of the `DeBruijnGraph` will be performed by calling the `DoEul
 The algorithm used to do this is: [Hierholzer's Algorithm](https://www.geeksforgeeks.org/hierholzers-algorithm-directed-graph/) (a linear time algorithm).
 
 
-## Main Workflow design
+## Main Workflow Design
 
 1. Take in `k` and the reads, then create a `KMerifier` object.
 2. Create a `DeBruijnGraph` object and initialize its nodes using the `KMerifier` class object (created in step 1).
