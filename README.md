@@ -53,7 +53,7 @@ private:
 	vector<string> reads;
 
 public:
-	KMerifier(int Kay, vector<string> Reads);
+	KMerifier(int Kay, vector<string> Reads); // constructor
 	
 	unordered_map<int, string> getKMers(); // returns KMers of the reads, in order
 	unordered_map<int, string> getKMinusOneMers(); // returns (K-1)-Mers of the reads in order
@@ -61,6 +61,9 @@ public:
 	// using unordered_map above instead of a vector has some benefits here
 
 	unordered_set<string> getUniqueKMinusOneMers(); // returns unique (k-1)-mers
+
+	int getK(); // returns value of k
+	void setK(); // sets the value of k
 }
 ```
 For a general idea of how this needs to be done, have a look at `src/proc_input.cpp`.
@@ -105,18 +108,19 @@ public:
 
 	bool contains(Node node); // returns true if the string node is there in the graph
 
-	void initNodesFromKMerifier(KMerifier kmf); // initializes the nodes from an object of a KMerifier class type. Use the addEdge and addNode functions inside this function.
+	void initNodesFromKMerifier(KMerifier kmf); // initializes the nodes from an object of a KMerifier class type. 
+	// Use the addEdge and addNode functions from inside this function.
 
 	void printAdjList(); // for debugging purposes
 
 	string DoEulerianWalk(); // implementation of the Heirholzer's algorithm.
 
-	// ... other functions may be added.
+	// ... other functions may be added, for example, for debugging.
 }
 ```
 
 The Eulerian walk of the `DeBruijnGraph` will be performed by calling the `DoEulerianWalk()` function. This function returns us the complete string.
-The algorithm used to do this is: [Heirholzer's Algorithm](https://www.geeksforgeeks.org/hierholzers-algorithm-directed-graph/) (a linear time algorithm).
+The algorithm used to do this is: [Hierholzer's Algorithm](https://www.geeksforgeeks.org/hierholzers-algorithm-directed-graph/) (a linear time algorithm).
 
 
 
