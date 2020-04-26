@@ -68,7 +68,7 @@ public:
 	unordered_set<string> getUniqueKMinusOneMers(); // returns unique (k-1)-mers
 
 	int getK(); // returns value of k
-	void setK(); // sets the value of k
+	void setK(int kay); // sets the value of k
 };
 ```
 For a general idea of how this needs to be done, have a look at `src/proc_input.cpp`.
