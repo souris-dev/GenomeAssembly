@@ -141,4 +141,5 @@ The algorithm used to do this is: [Hierholzer's Algorithm](https://www.geeksforg
 2. Create a `DeBruijnGraph` object and initialize its nodes using the `KMerifier` class object (created in step 1).
 3. Use `DoEulerianWalk()` of the `DeBruijnGraph` object to get the complete string.
 4. **Next Implementation**: Do the above three steps for different values of `k` (instead of asking the user for `k` again, use *k(initial) + 1* and *k(initial) - 1* as `k` values, as mentioned before).
+   Show the string that occurs 2 times (or more) out of the three. If all the 3 strings are different, show them all.
 
