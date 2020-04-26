@@ -84,7 +84,7 @@ Remember that here, the nodes of the DeBruijn graph are `string`s.
 A class DeBruijnGraph would be handy for this.
 
 **A `DeBruijnGraph` object's nodes should be initialized by either of these methods:
-1. Creating a KMerifier object and then passing it to a function `initNodesFromKMerifier`, which takes that object as an argument.**
+1. Creating a KMerifier object and then passing it to a function `initNodesFromKMerifier`, which takes that object as an argument.
 2. Creating a KMerifier object and then passing it to the constructor of the class `DeBruijnGraph`, so that it gets initialized at the time of creation.**
 
 The adjacency list will be an unordered_map (for easy access of elements using []).
