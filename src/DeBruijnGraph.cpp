@@ -115,6 +115,7 @@ string DeBruijnGraph::DoEulerianWalk()
 
     // The reversed circuit is stored in 'circuit'
     // Now we need to reverse it to get the actual circuit
+    
     reverse(circuit.begin(), circuit.end());
 
     original = circuit[0];
