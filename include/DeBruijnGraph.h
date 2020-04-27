@@ -19,13 +19,18 @@ class DeBruijnGraph
 {
 private:
 	unordered_map <Node, vector<Node>> adjList;
+	unordered_map <int, Node> nodes; // associates a number to each Node
+	
 	unordered_map <Node, int> edgeCounts; // stores the number of edges each node has EMERGING from it
+	
+	KMerifier kmf; // the KMerifier object we'll be using
 	
 	void connectLastAndFirst(); // connects the last node with the first node
 	void countEdges(); // counts the number of edges each node has EMERGING from it (populates edge_counts)
 
 public:
-	DeBruijnGraph(); // empty constructor
+	DeBruijnGraph() = default; // need to keep the compiler happy
+
 	DeBruijnGraph(KMerifier kmf); // constructor to directly initialize the graph with a KMerifier object
 
 	void addEdge(Node nodeFrom, Node nodeTo);

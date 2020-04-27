@@ -23,6 +23,7 @@ private:
 	vector<string> reads;
 
 public:
+	KMerifier() = default; // to keep the compiler happy 
 	KMerifier(int Kay, vector<string> Reads); // constructor
 	
 	unordered_map<int, string> getKMers(); // returns KMers of the reads, in order

@@ -106,6 +106,7 @@ class DeBruijnGraph
 {
 private:
 	unordered_map <Node, vector<Node>> adjList;
+	unordered_map <int, Node> nodes; // associates a number to each Node
 	unordered_map <Node, int> edgeCounts; // stores the number of edges each node has EMERGING from it
 	
 	void connectLastAndFirst(); // connects the last node with the first node
@@ -120,7 +121,7 @@ public:
 
 	bool contains(Node node); // returns true if the string node is there in the graph
 
-	void initNodesFromKMerifier(KMerifier kmf); // initializes the nodes from an object of a KMerifier class type. 
+	void initNodesFromKMerifier(KMerifier kmf); // initializes the nodes from an object of the KMerifier class type. 
 	// Use the addEdge and addNode functions from inside this function.
 
 	void printAdjList(); // for debugging purposes
