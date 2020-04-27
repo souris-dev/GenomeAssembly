@@ -5,6 +5,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#define Node string
+
 using namespace std;
 
 int main()
@@ -77,4 +79,49 @@ int main()
    {
        cout << *it << endl;
    }
+
+    unordered_map <Node, vector<Node>> adjList;
+    unordered_map <int, Node> nodes; // associates a number to each Node
+	
+    unordered_map <Node, int> edgeCounts;
+
+    // Initialize the Graph
+
+    int nodesInserted = 0;
+
+    for (int i = 0; i < k_1_mers.size(); i++)
+    {
+        if (adjList.find(k_1_mers[i]) != adjList.end())
+        // if adjList does not contain that k_1_mer
+        {
+            // add that k-1-mer to the graph
+            vector<Node> internalList; // initialize an empty vector
+            adjList[k_1_mers[i]] = internalList;
+
+            nodesInserted++;
+            nodes[nodesInserted] = k_1_mers[i];
+
+            if (nodesInserted > 0)
+            {
+                Node prevNodeInserted = nodes[nodesInserted - 1];
+                Node currNodeInserted = nodes[nodesInserted];
+                
+                // connect the previous node with the current node
+                // by adding a directed edge between them
+                adjList[prevNodeInserted].push_back(currNodeInserted);
+            }
+        }
+    }
+
+
+    Node lastNode = nodes[nodes.size() - 1];
+    Node firstNode = nodes[0];
+
+    adjList[lastNode].push_back(firstNode);
+
+    for (int i = 0; i < nodes.size(); i++)
+    {
+        Node node = nodes[i];
+        edgeCounts[node] = adjList[node].size();
+    }
 }
