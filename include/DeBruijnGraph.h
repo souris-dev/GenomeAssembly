@@ -2,7 +2,7 @@
 // Contains prototypes for the DeBruijnGraph class
 
 // This file's contents should be included only once
-// Hence the ifndef direcitves:
+// Hence the ifndef directives:
 
 #ifndef DEBRUIJNGRAPH_H
 #define DEBRUIJNGRAPH_H
