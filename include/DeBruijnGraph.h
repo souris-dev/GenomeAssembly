@@ -40,8 +40,6 @@ public:
 	void printAdjList(); // for debugging purposes
 
 	string DoEulerianWalk(); // implementation of the Heirholzer's algorithm. This function returns the original string.
-
-	// ... other functions may be added, for example, for debugging.
 };
 
 #endif
