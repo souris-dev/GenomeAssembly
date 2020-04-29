@@ -1,12 +1,10 @@
 // main.cpp
 // Application entry point
 #include "../include/DeBruijnGraph.h"
-#include "../include/KMerifier.h" // this line is not required, but for clarity
 
 int main()
 {
-
-    vector<int, string> Reads;
+    vector<string> Reads;
    
     cout << "\nEnter k: ";
     int k;
@@ -16,22 +14,23 @@ int main()
     int count;
     cin >> count;
 
-
-     for (int i = 0; i < count; i++)
+    // input the reads
+    for (int i = 0; i < count; i++)
     {
         string read;
         cin >> read;
         Reads.push_back(read);
-
     }
     
-    
-    KMerifier kmf= KMerifier(k,Reads);
+    KMerifier kmf = KMerifier(k, Reads);
+
+    // The DeBruijnGraph takes a KMerifier object in its constructor
     DeBruijnGraph dbg = DeBruijnGraph(kmf);
 
+    // Get the original string by performing an Eulerian walk of the graph
     string orign = dbg.DoEulerianWalk();
 
-    cout<<"Original String is : " << orign;
+    cout << "Original String is : " << orign;
 
     return 0;
 }
