@@ -11,19 +11,14 @@ int main()
     unordered_map<int, string> k_1_mers;
     unordered_set<string> k_1_mers_nodup;
 
-    kmers=getKMers();
-    k_1_mers=getKMinusOneMers();
-    k_1_mers_nodup=getUniqueKMinusOneMers();
-
     cout << "\nEnter k: ";
     int k;
     cin >> k;
-
+   
     cout << "\nEnter number of reads: ";
     int count;
     cin >> count;
 
-    vector<string>Reads;
 
      for (int i = 0; i < count; i++)
     {
@@ -32,6 +27,10 @@ int main()
         Reads.pushback(read)
 
     }
+    
+     kmers=getKMers();
+    k_1_mers=getKMinusOneMers();
+    k_1_mers_nodup=getUniqueKMinusOneMers();
 
     KMerifier kmf= KMerifier(k,Reads);
     DeBruijnGraph dbg = DeBruijnGraph(kmf);
