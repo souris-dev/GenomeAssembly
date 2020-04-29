@@ -7,10 +7,7 @@ int main()
 {
 
     vector<int, string> Reads;
-    unordered_map<int, string> kmers;
-    unordered_map<int, string> k_1_mers;
-    unordered_set<string> k_1_mers_nodup;
-
+   
     cout << "\nEnter k: ";
     int k;
     cin >> k;
@@ -24,13 +21,11 @@ int main()
     {
         string read;
         cin >> read;
-        Reads.pushback(read)
+        Reads.pushback(read);
 
     }
     
-     kmers=getKMers();
-    k_1_mers=getKMinusOneMers();
-    k_1_mers_nodup=getUniqueKMinusOneMers();
+    
 
     KMerifier kmf= KMerifier(k,Reads);
     DeBruijnGraph dbg = DeBruijnGraph(kmf);
