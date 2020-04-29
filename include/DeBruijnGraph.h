@@ -11,10 +11,6 @@
 
 #define Node string
 
-// This is actually bad practice, but for simplicity
-// and because we won't be using any other namespace for now
-
-
 class DeBruijnGraph
 {
 private:
