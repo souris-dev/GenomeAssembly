@@ -14,7 +14,6 @@ unordered_map<int, string> KMerifier::getKMers()
 {
     // returns KMers of the reads, in order
     int ind=0;
-    vector<int, string> reads; 
     unordered_map<int, string> kmers;
     
     for (int i = 0; i < reads.size(); i++)
@@ -39,7 +38,7 @@ unordered_map<int, string> KMerifier::getKMinusOneMers()
     // returns (K-1)-Mers of the reads in order
      unordered_map<int, string> kmers;
      unordered_map<int, string> k_1_mers;
-     kmers = getKMers()
+     kmers = getKMers();
 
     for (int i = 0; i < kmers.size(); i++)
     {
@@ -60,8 +59,8 @@ unordered_set<string> KMerifier::getUniqueKMinusOneMers()
     unordered_map<int, string> kmers;
      unordered_map<int, string> k_1_mers;
      unordered_set<string> k_1_mers_nodup;
-     kmers = getKMers()
-     k_1_mers = getKMinusOneMers()
+     kmers = getKMers();
+     k_1_mers = getKMinusOneMers();
     // returns unique (k-1)-mers
     for (int i = 0; i < kmers.size(); i++)
         
@@ -89,7 +88,7 @@ void KMerifier::setK(int kay)
 void KMerifier::dispKMers()
 {
     unordered_map<int, string> kmers;
-    kmers = getKMers()
+    kmers = getKMers();
      for (int i = 0; i < kmers.size(); i++)
    {
        cout << kmers[i] << endl;
@@ -101,7 +100,7 @@ void KMerifier::dispKMers()
 void KMerifier::dispKOneMers()
 {
     unordered_map<int, string> k_1_mers;
-    k_1_mers = getKMinusOneMers()
+    k_1_mers = getKMinusOneMers();
       for (int i = 0; i < k_1_mers.size(); i++)
    {
        cout << k_1_mers[i] << endl;
