@@ -26,7 +26,6 @@ int main()
     }
     
     
-
     KMerifier kmf= KMerifier(k,Reads);
     DeBruijnGraph dbg = DeBruijnGraph(kmf);
 
