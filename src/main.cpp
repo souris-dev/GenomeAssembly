@@ -21,7 +21,7 @@ int main()
     {
         string read;
         cin >> read;
-        Reads.pushback(read);
+        Reads.push_back(read);
 
     }
     
