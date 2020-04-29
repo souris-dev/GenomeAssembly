@@ -37,9 +37,9 @@ public:
 	void setK(int kay); // sets the value of k
 	
 	//For debugging
-	void KMerifier::dispKMers();//display k mers
-	void KMerifier::dispKOneMers();//display (k-1)-mers
-	void KMerifier::dispUniqueKOneMers();//display unique (k-1)-mers
+	void dispKMers();//display k mers
+	void dispKOneMers();//display (k-1)-mers
+	void dispUniqueKOneMers();//display unique (k-1)-mers
 };
 
 #endif
