@@ -10,11 +10,20 @@
 void DeBruijnGraph::connectLastAndFirst()
 {
     // connects the last node with the first node
+    Node lastNode = nodes[nodes.size() - 1];
+    Node firstNode = nodes[0];
+
+    adjList[lastNode].push_back(firstNode);
 }
 
 void DeBruijnGraph::countEdges()
 {
     // counts the number of edges each node has EMERGING from it (populates edge_counts)
+    for (int i = 0; i < nodes.size(); i++)
+    {
+        Node node = nodes[i];
+        edgeCounts[node] = adjList[node].size();
+    }
 }
 
 DeBruijnGraph::DeBruijnGraph(KMerifier kmf) // constructor
@@ -25,11 +34,15 @@ DeBruijnGraph::DeBruijnGraph(KMerifier kmf) // constructor
 void DeBruijnGraph::addEdge(Node nodeFrom, Node nodeTo)
 {
     // add an edge from nodeFrom to nodeTo
+    adjList[nodeFrom].push_back(nodeTo);
 }
 
 void DeBruijnGraph::addNode(Node node)
 {
     // add the node 'node' to the graph
+
+    vector<Node> internalList; // initialize an empty vector
+    adjList[node] = internalList;
 }
 
 void DeBruijnGraph::initNodesFromKMerifier(KMerifier kmf)
@@ -43,12 +56,13 @@ void DeBruijnGraph::initNodesFromKMerifier(KMerifier kmf)
     // 4. Add these nodes in their order of addition into 'nodes'
     // Like the first added node goes into: nodes[0], the second one nodes[1]
     // and so on.
-     int nodesInserted = 0;
-     unordered_map<int, string> k_1_mers = kmf.KMinusOneMers();
+    
+    int nodesInserted = 0;
+    unordered_map<int, string> k_1_mers = kmf.getKMinusOneMers();
 
-     for (int i = 0; i < k_1_mers.size(); i++)
+    for (int i = 0; i < k_1_mers.size(); i++)
     {
-        if (contain(k_1_mers[i]))
+        if (!contains(k_1_mers[i]))
         // if adjList does not contain that k_1_mer
         {
             // add that k-1-mer to the graph
