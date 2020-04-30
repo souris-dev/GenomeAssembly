@@ -13,7 +13,11 @@ void DeBruijnGraph::connectLastAndFirst()
     Node lastNode = nodes[nodes.size() - 1];
     Node firstNode = nodes[0];
 
-    adjList[lastNode].push_back(firstNode);
+    // DEBUG
+    cout << "\nConnecting last and first node: ";
+    cout << "\nLast node: " << lastNode << ", first node: " << firstNode << endl;
+
+    addEdge(lastNode, firstNode);
 }
 
 
@@ -73,17 +77,24 @@ void DeBruijnGraph::initNodesFromKMerifier(KMerifier kmf)
             // add that k-1-mer to the graph
             addNode(k_1_mers[i]);
 
-            nodesInserted++;
-            nodes[nodesInserted] = k_1_mers[i];
+            // DEBUG
+            cout << "\nAdded node: " << k_1_mers[i];
 
-            if (nodesInserted > 0)
+            nodes[nodesInserted] = k_1_mers[i];
+            nodesInserted++;
+
+            if (nodesInserted > 1)
             {
-                Node prevNodeInserted = nodes[nodesInserted - 1];
-                Node currNodeInserted = nodes[nodesInserted];
+                Node prevNodeInserted = nodes[(nodesInserted - 1) - 1]; 
+                // nodesInserted is one-based, so have to do -1
+                Node currNodeInserted = nodes[nodesInserted - 1];
 
                 // connect the previous node with the current node
                 // by adding a directed edge between them
                 addEdge(prevNodeInserted, currNodeInserted);
+
+                // DEBUG
+                cout << "\nAdded edge: " << prevNodeInserted << " to " << currNodeInserted;
             }
         }
     }
@@ -103,6 +114,16 @@ bool DeBruijnGraph::contains(Node node)
 void DeBruijnGraph::printAdjList()
 {
     // for debugging purposes
+    
+    for (int i = 0; i < nodes.size(); i++)
+    {
+        cout << nodes[i] << ": ";
+        for (int j = 0; j < adjList[nodes[i]].size(); j++)
+        {
+            cout << adjList[nodes[i]][j] << " ";
+        }
+        cout << endl;
+    }
 }
 
 
@@ -113,6 +134,10 @@ string DeBruijnGraph::DoEulerianWalk()
     string original = "";
 
     connectLastAndFirst(); // needed in order for Hierholzer's Algo to work
+    
+    // DEBUG
+    cout << "\nConnected last and first. AdjList: \n";
+    printAdjList();
 
     unordered_map <Node, vector<Node>> adjListTemp = this->adjList;
 
@@ -171,12 +196,14 @@ string DeBruijnGraph::DoEulerianWalk()
 
     original = circuit[0];
 
-    for (int i = 0; i < (circuit.size() - 1); i++)
-    // we need to ignore the last node of the circuit,
-    // so i goes from 0 to circuit.size() - 2
+    // first node is already added to original,
+    // and we need to ignore the last node of the circuit,
+    // so i goes from i = 0 to i = circuit.size() - 2
+    for (int i = 1; i < (circuit.size() - 1); i++)
     {
         // append the last character
-        original += circuit[i].substr((kmf.getK() - 1) - 1, 1);
+        string curr = circuit[i];
+        original += curr[curr.size() - 1];
     }
 
     return original;
