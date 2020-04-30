@@ -43,11 +43,40 @@ void DeBruijnGraph::initNodesFromKMerifier(KMerifier kmf)
     // 4. Add these nodes in their order of addition into 'nodes'
     // Like the first added node goes into: nodes[0], the second one nodes[1]
     // and so on.
+     int nodesInserted = 0;
+     unordered_map<int, string> k_1_mers = kmf.KMinusOneMers();
+
+     for (int i = 0; i < k_1_mers.size(); i++)
+    {
+        if (contain(k_1_mers[i]))
+        // if adjList does not contain that k_1_mer
+        {
+            // add that k-1-mer to the graph
+            addNode(k_1_mers[i]);
+
+            nodesInserted++;
+            nodes[nodesInserted] = k_1_mers[i];
+
+            if (nodesInserted > 0)
+            {
+                Node prevNodeInserted = nodes[nodesInserted - 1];
+                Node currNodeInserted = nodes[nodesInserted];
+
+                // connect the previous node with the current node
+                // by adding a directed edge between them
+                addEdge(prevNodeInserted, currNodeInserted);
+            }
+        }
+    }
 }
 
 bool DeBruijnGraph::contains(Node node)
 {
     // returns true if the string node is there in the graph
+    if (adjList.find(node) != adjList.end())
+        return true;
+    else
+        return false;
 }
 
 void DeBruijnGraph::printAdjList()
@@ -57,7 +86,7 @@ void DeBruijnGraph::printAdjList()
 
 string DeBruijnGraph::DoEulerianWalk()
 {
-    // implementation of the Heirholzer's algorithm. 
+    // implementation of the Heirholzer's algorithm.
     // This function returns the original string.
     string original = "";
 
@@ -75,7 +104,7 @@ string DeBruijnGraph::DoEulerianWalk()
     }
 
     stack<Node> currPath; // for backtracking purposes
-    
+
     // to store the final circuit:
     vector<Node> circuit;
 
@@ -94,7 +123,7 @@ string DeBruijnGraph::DoEulerianWalk()
             Node nextNode = adjListTemp[currNode].back();
 
             edgeCountsTemp[currNode]--;
-            
+
             adjListTemp[currNode].pop_back();
 
             // get to the next node
@@ -115,13 +144,13 @@ string DeBruijnGraph::DoEulerianWalk()
 
     // The reversed circuit is stored in 'circuit'
     // Now we need to reverse it to get the actual circuit
-    
+
     reverse(circuit.begin(), circuit.end());
 
     original = circuit[0];
 
     for (int i = 0; i < (circuit.size() - 1); i++)
-    // we need to ignore the last node of the circuit, 
+    // we need to ignore the last node of the circuit,
     // so i goes from 0 to circuit.size() - 2
     {
         // append the last character
