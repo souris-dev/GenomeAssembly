@@ -16,6 +16,7 @@ void DeBruijnGraph::connectLastAndFirst()
     adjList[lastNode].push_back(firstNode);
 }
 
+
 void DeBruijnGraph::countEdges()
 {
     // counts the number of edges each node has EMERGING from it (populates edge_counts)
@@ -26,16 +27,19 @@ void DeBruijnGraph::countEdges()
     }
 }
 
+
 DeBruijnGraph::DeBruijnGraph(KMerifier kmf) // constructor
 {
     initNodesFromKMerifier(kmf);
 }
+
 
 void DeBruijnGraph::addEdge(Node nodeFrom, Node nodeTo)
 {
     // add an edge from nodeFrom to nodeTo
     adjList[nodeFrom].push_back(nodeTo);
 }
+
 
 void DeBruijnGraph::addNode(Node node)
 {
@@ -44,6 +48,7 @@ void DeBruijnGraph::addNode(Node node)
     vector<Node> internalList; // initialize an empty vector
     adjList[node] = internalList;
 }
+
 
 void DeBruijnGraph::initNodesFromKMerifier(KMerifier kmf)
 {
@@ -56,7 +61,7 @@ void DeBruijnGraph::initNodesFromKMerifier(KMerifier kmf)
     // 4. Add these nodes in their order of addition into 'nodes'
     // Like the first added node goes into: nodes[0], the second one nodes[1]
     // and so on.
-    
+
     int nodesInserted = 0;
     unordered_map<int, string> k_1_mers = kmf.getKMinusOneMers();
 
@@ -84,6 +89,7 @@ void DeBruijnGraph::initNodesFromKMerifier(KMerifier kmf)
     }
 }
 
+
 bool DeBruijnGraph::contains(Node node)
 {
     // returns true if the string node is there in the graph
@@ -93,10 +99,12 @@ bool DeBruijnGraph::contains(Node node)
         return false;
 }
 
+
 void DeBruijnGraph::printAdjList()
 {
     // for debugging purposes
 }
+
 
 string DeBruijnGraph::DoEulerianWalk()
 {
