@@ -3,7 +3,7 @@ CFLAGS = --std=c++14 -O
 CC = g++
 
 GenomeAssembler: main.o DeBruijnGraph.o KMerifier.o
-		$(CC) $(CFLAGS) -o build/GenomeAssembler.exe build/main.o build/DeBruijnGraph.o build/KMerifier.o
+		$(CC) $(CFLAGS) -o build/GA.exe build/main.o build/DeBruijnGraph.o build/KMerifier.o
 
 main.o:
 	$(CC) $(CFLAGS) -c src/main.cpp -o build/main.o

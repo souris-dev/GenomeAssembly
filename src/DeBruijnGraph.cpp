@@ -13,10 +13,6 @@ void DeBruijnGraph::connectLastAndFirst()
     Node lastNode = nodes[nodes.size() - 1];
     Node firstNode = nodes[0];
 
-    // DEBUG
-    cout << "\nConnecting last and first node: ";
-    cout << "\nLast node: " << lastNode << ", first node: " << firstNode << endl;
-
     addEdge(lastNode, firstNode);
 }
 
@@ -77,24 +73,18 @@ void DeBruijnGraph::initNodesFromKMerifier(KMerifier kmf)
             // add that k-1-mer to the graph
             addNode(k_1_mers[i]);
 
-            // DEBUG
-            cout << "\nAdded node: " << k_1_mers[i];
-
             nodes[nodesInserted] = k_1_mers[i];
             nodesInserted++;
 
             if (nodesInserted > 1)
             {
                 Node prevNodeInserted = nodes[(nodesInserted - 1) - 1]; 
-                // nodesInserted is one-based, so have to do -1
+                // nodesInserted is one-based, so have to subtract one
                 Node currNodeInserted = nodes[nodesInserted - 1];
 
                 // connect the previous node with the current node
                 // by adding a directed edge between them
                 addEdge(prevNodeInserted, currNodeInserted);
-
-                // DEBUG
-                cout << "\nAdded edge: " << prevNodeInserted << " to " << currNodeInserted;
             }
         }
     }
@@ -134,10 +124,6 @@ string DeBruijnGraph::DoEulerianWalk()
     string original = "";
 
     connectLastAndFirst(); // needed in order for Hierholzer's Algo to work
-    
-    // DEBUG
-    cout << "\nConnected last and first. AdjList: \n";
-    printAdjList();
 
     unordered_map <Node, vector<Node>> adjListTemp = this->adjList;
 
@@ -194,16 +180,41 @@ string DeBruijnGraph::DoEulerianWalk()
 
     reverse(circuit.begin(), circuit.end());
 
+    // --- Restoration of the original string ---
+
     original = circuit[0];
 
     // first node is already added to original,
     // and we need to ignore the last node of the circuit,
     // so i goes from i = 0 to i = circuit.size() - 2
+
+    int k = kmf.getK();
+
     for (int i = 1; i < (circuit.size() - 1); i++)
     {
-        // append the last character
-        string curr = circuit[i];
-        original += curr[curr.size() - 1];
+        // if there is an overlap between the previous and this node
+        // so that left k-2-mer of this node is same as right k-2-mer of previous node,
+        // for eg: AGG and GGB have GG in common
+        // then append the last character only, of the current node
+
+        // the nodes should atleast have 2 characters to check for overlaps though
+    
+        // apparently substr was not working properly so had to use this jugaad
+        string right_prev = string(circuit[i - 1].begin() + 1, circuit[i - 1].end());
+        string left_curr = string(circuit[i].begin(), circuit[i].end() - 1);
+
+        if ((k - 1 > 1) && (right_prev == left_curr))
+        {
+            string curr = circuit[i];
+            original += curr[curr.size() - 1]; // add the last characteter only
+        }
+
+        // otherwise, append this node as it is
+        else
+        {
+            original += circuit[i];    
+        }
+        
     }
 
     return original;
