@@ -35,6 +35,11 @@ public:
 
 	int getK(); // returns value of k
 	void setK(int kay); // sets the value of k
+	
+	//For debugging
+	void dispKMers();//display k mers
+	void dispKOneMers();//display (k-1)-mers
+	void dispUniqueKOneMers();//display unique (k-1)-mers
 };
 
 #endif

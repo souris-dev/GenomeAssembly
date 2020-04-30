@@ -11,10 +11,6 @@
 
 #define Node string
 
-// This is actually bad practice, but for simplicity
-// and because we won't be using any other namespace for now
-
-
 class DeBruijnGraph
 {
 private:
@@ -44,8 +40,6 @@ public:
 	void printAdjList(); // for debugging purposes
 
 	string DoEulerianWalk(); // implementation of the Heirholzer's algorithm. This function returns the original string.
-
-	// ... other functions may be added, for example, for debugging.
 };
 
 #endif
