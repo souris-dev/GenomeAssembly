@@ -28,9 +28,10 @@ void DeBruijnGraph::countEdges()
 }
 
 
-DeBruijnGraph::DeBruijnGraph(KMerifier kmf) // constructor
+DeBruijnGraph::DeBruijnGraph(KMerifier KMF) // constructor
 {
-    initNodesFromKMerifier(kmf);
+    kmf = KMF;
+    initNodesFromKMerifier(KMF);
 }
 
 
