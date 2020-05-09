@@ -46,8 +46,8 @@ unordered_map<int, string> KMerifier::getKMinusOneMers()
         // of k_1_mers
         string km = kmers[i];
 
-        k_1_mers[i*2] = km.substr(0, k-1);
-        k_1_mers[i*2 + 1] = km.substr(1, k-1);
+        k_1_mers[2*i] = km.substr(0, k-1);
+        k_1_mers[2*i + 1] = km.substr(1, k-1);
         
     }
     return k_1_mers;

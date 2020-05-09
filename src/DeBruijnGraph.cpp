@@ -64,29 +64,45 @@ void DeBruijnGraph::initNodesFromKMerifier(KMerifier kmf)
     // and so on.
 
     int nodesInserted = 0;
+    int edgesInserted = 0;
+
     unordered_map<int, string> k_1_mers = kmf.getKMinusOneMers();
 
+    
     for (int i = 0; i < k_1_mers.size(); i++)
     {
-        if (!contains(k_1_mers[i]))
-        // if adjList does not contain that k_1_mer
+        if (!(contains(k_1_mers[i])))
+        // if previous k-1-mer is not the same as this k-1-mer
         {
             // add that k-1-mer to the graph
             addNode(k_1_mers[i]);
 
             nodes[nodesInserted] = k_1_mers[i];
             nodesInserted++;
+        }
+    }
 
-            if (nodesInserted > 1)
-            {
-                Node prevNodeInserted = nodes[(nodesInserted - 1) - 1]; 
-                // nodesInserted is one-based, so have to subtract one
-                Node currNodeInserted = nodes[nodesInserted - 1];
+    // first connect the left k-1-mer to corresponding right-k-1-mer
+    for (int i = 0; i < k_1_mers.size(); i+= 2)
+    {
+        if (nodesInserted > 1)
+        {
+            edgesInserted++;
+            addEdge(k_1_mers[i], k_1_mers[i + 1]);
+        }
+    }
 
-                // connect the previous node with the current node
-                // by adding a directed edge between them
-                addEdge(prevNodeInserted, currNodeInserted);
-            }
+    // then connect the previous right-k-1-mer to next left-k-1-mer
+    for (int i = 1; i < k_1_mers.size() - 1; i+= 2)
+    {
+        if (k_1_mers[i] == k_1_mers[i + 1])
+            continue;
+        
+
+        if (nodesInserted > 1)
+        {
+            edgesInserted++;
+            addEdge(k_1_mers[i], k_1_mers[i + 1]);
         }
     }
 }
